@@ -21,6 +21,8 @@ export default class Register extends Component {
       zoom: 2.7,
     });
 
+
+
     // Connect to contract
 
     // Pull all registered addresses
@@ -28,6 +30,9 @@ export default class Register extends Component {
     // Pull all 3box spaces
 
     // get array of approved GeoJSON files
+    this.props.registeredZones.forEach( (registeredZone, i) => {
+      console.log(i, registeredZone)
+    })
 
     // Put them into turf objects
 

@@ -10,7 +10,7 @@ import {
 import { ethers } from "ethers";
 import NavBar from './NavBar'
 import Register from './register/Register'
-import registeredZones from '../registeredTestZones.json';
+var registeredZones = require('../registeredTestZones.json');
 
 // import Approve from './approve/Approve'
 
@@ -19,7 +19,7 @@ class App extends Component {
 
   state = {
     needToAWeb3Browser: false,
-    // registeredZones: registeredZones,
+    registeredZones: registeredZones,
   }
 
   async getAddressFromMetaMask() {
@@ -46,6 +46,7 @@ class App extends Component {
     if (this.state.needToAWeb3Browser) {
       return <h1>Please install metamask</h1>
     }
+    console.log(this.state);
 
     return (
       <Router>
@@ -56,7 +57,7 @@ class App extends Component {
             {this.state.accounts && (
               <Switch>
                 <Route path="/register">
-                  <Register addr = {this.state.accounts[0]} />
+                  <Register addr = {this.state.accounts[0]} registeredZones = {this.state.registeredZones} />
                 </Route>
                 <Route path="/admin">
 
