@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component, useState} from 'react';
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -10,7 +10,7 @@ import {
 import { ethers } from "ethers";
 import NavBar from './NavBar'
 import Register from './register/Register'
-var registeredZones = require('../registeredTestZones.json');
+var registeredZones = require('../registeredTestZonesSmall.json');
 
 // import Approve from './approve/Approve'
 
@@ -20,6 +20,16 @@ class App extends Component {
   state = {
     needToAWeb3Browser: false,
     registeredZones: registeredZones,
+    zoneToRegister: undefined,
+  }
+
+  constructor() {
+    super()
+    this.setZoneToRegister = this.setZoneToRegister.bind(this)
+  }
+
+  async setZoneToRegister(zone) {
+    this.setState({zoneToRegister: zone});
   }
 
   async getAddressFromMetaMask() {
@@ -42,7 +52,6 @@ class App extends Component {
 
 
   render() {
-
     if (this.state.needToAWeb3Browser) {
       return <h1>Please install metamask</h1>
     }
@@ -57,7 +66,7 @@ class App extends Component {
             {this.state.accounts && (
               <Switch>
                 <Route path="/register">
-                  <Register addr = {this.state.accounts[0]} registeredZones = {this.state.registeredZones} />
+                  <Register addr = {this.state.accounts[0]} registeredZones = {this.state.registeredZones} setZoneToRegister={this.setZoneToRegister} />
                 </Route>
                 <Route path="/admin">
 

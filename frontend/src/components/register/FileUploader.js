@@ -1,7 +1,11 @@
 import React, {useMemo, useCallback}  from 'react';
 import {useDropzone} from 'react-dropzone';
 import onPolygonDrop from './onPolygonDrop'
+import * as turfHelpers from "@turf/helpers"
+import  booleanContains from "@turf/boolean-contains"
 
+console.log(turfHelpers);
+console.log(booleanContains);
 
 // styling
 const baseStyle = {
@@ -33,23 +37,57 @@ const baseStyle = {
   };
 
 // dropzone component
-export default function Accept(props) {
+export default function FileUploader(props) {
 
     const onDrop = useCallback(acceptedFiles => {
         // Do something with the files
         const reader = new FileReader();
         reader.onload = () => {
 
-          this.props.registeredZones.forEach(function (registeredZone) {
-            // if loadedZone in registeredZone
-              // Has parent
+          let geojson = JSON.parse(reader.result),
+            turfRegisteredZone, turfPoly;
 
-            // else does not.
-          })
-            onPolygonDrop(JSON.parse(reader.result))
+          if (geojson.type == 'Feature' && geojson.geometry.type == "Polygon") {
+            turfPoly = turfHelpers.polygon(geojson.geometry.coordinates);
+          }
+          if (geojson.type == 'MultiPolygon') {
+            turfPoly = turfHelpers.multiPolygon(geojson.geometry.coordinates);
+          } else if (geojson.type == 'Polygon') {
+            turfPoly = turfHelpers.polygon(geojson.geometry.coordinates);
+          }
+
+          props.registeredZones.forEach(function (registeredZone) {
+
+            if (registeredZone.geometry.type == 'MultiPolygon') {
+              turfRegisteredZone = turfHelpers.multiPolygon(registeredZone.geometry.coordinates);
+            } else if (registeredZone.geometry.type == 'Polygon') {
+              turfRegisteredZone = turfHelpers.polygon(registeredZone.geometry.coordinates);
+            }
+
+            // Error waiting to happen - zones within zones ...
+            if (booleanContains(turfRegisteredZone, turfPoly)) {
+              geojson.properties.tested = true;
+              geojson.properties.parent = {
+                address: registeredZone.properties.address,
+                iso3:  registeredZone.properties.ISO3
+              }
+              props.setZoneToRegister(geojson);
+            }
+          });
+
+
+            geojson.properties.tested = true;
+            geojson.properties.parent = null;
+
+            props.setZoneToRegister(geojson);
+
+            props.addPolygonToMap(geojson);
+            // onPolygonDrop(geojson)
         }
 
         reader.readAsBinaryString(acceptedFiles[0]);
+
+        return "Something?";
     }, [])
 
     const {
@@ -58,7 +96,8 @@ export default function Accept(props) {
         getInputProps,
         isDragActive,
         isDragAccept,
-        isDragReject
+        isDragReject,
+        // geojon
       } = useDropzone({accept: '.json', onDrop : onDrop});
 
     const style = useMemo(() => ({
