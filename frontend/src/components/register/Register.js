@@ -89,7 +89,7 @@ export default class Register extends Component {
       'source': 'zone-to-register-source',
       'layout': {},
       'paint': {
-        'fill-color': "red",
+        'fill-color': "yellow",
         'fill-opacity': 0.4
       }
     });
