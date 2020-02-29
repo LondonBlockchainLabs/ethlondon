@@ -9,13 +9,14 @@ import bbox from "@turf/bbox"
 
 export default class Register extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       map : undefined,
     };
 
     this.addPolygonToMap = this.addPolygonToMap.bind(this);
+    this.registerPolygon = this.registerPolygon.bind(this);
 
   }
 
@@ -95,15 +96,19 @@ export default class Register extends Component {
     });
 
     this.state.map.fitBounds(bbox(polygon),
-        {padding: 75}
+        {padding: 150}
       );
   }
 
-  async onPolygDrop() {
-    // code here ...
-  }
+  async registerPolygon(e) {
+    e.preventDefault();
 
-  async onClick() {
+    // console.log('yo')
+    console.log(this.props.zoneToRegister);
+    console.log(this);
+    // call registerZone on ethers contract ...
+
+    // Write geojson string to 3box under
 
   }
 
@@ -121,9 +126,9 @@ export default class Register extends Component {
                     <Form.Group controlId="zoneName">
                         <Form.Label className = "text-primary">
                             Zone Name
-                        </Form.Label> 
+                        </Form.Label>
                         <Form.Control type="text" placeholder="Enter your zone name here" />
-                        
+
                     </Form.Group>
 
                     <Form.Group controlId="address">
@@ -131,14 +136,14 @@ export default class Register extends Component {
                             Ethereum Wallet Address
                         </Form.Label>
                         <Form.Control readOnly className = "text-muted" placeholder = {this.props.addr} />
-                            
+
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={this.registerPolygon}>
                         Submit
                     </Button>
                 </Form>
-            
+
         </div>
         );
     }

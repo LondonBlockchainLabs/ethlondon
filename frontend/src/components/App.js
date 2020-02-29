@@ -66,7 +66,7 @@ class App extends Component {
             {this.state.accounts && (
               <Switch>
                 <Route path="/register">
-                  <Register addr = {this.state.accounts[0]} registeredZones = {this.state.registeredZones} setZoneToRegister={this.setZoneToRegister} />
+                  <Register addr = {this.state.accounts[0]} registeredZones = {this.state.registeredZones} zoneToRegister = {this.state.zoneToRegister} setZoneToRegister={this.setZoneToRegister} />
                 </Route>
                 <Route path="/admin">
 
