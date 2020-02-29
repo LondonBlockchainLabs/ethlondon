@@ -1,26 +1,15 @@
 {
   "type": "Feature",
   "properties": {
+    "address": "0x058462918eE04F48F8c1C6d717F700620B9d2bb2",
     "SOVEREIGNT": "Germany",
-    "SOV_A3": "DEU",
-    "LEVEL": 2,
+    "ISO3": "DEU",
     "TYPE": "Sovereign country",
-    "ADMIN": "Germany",
     "NAME": "Germany",
-    "NAME_LONG": "Germany",
-    "ABBREV": "Ger.",
-    "POP_EST": 80594017,
-    "WIKIPEDIA": -99,
-    "ISO_A2": "DE",
-    "ISO_A3": "DEU",
-    "ISO_A3_EH": "DEU",
-    "ISO_N3": "276",
-    "UN_A3": "276",
-    "WB_A2": "DE",
-    "WB_A3": "DEU",
     "CONTINENT": "Europe",
     "REGION_UN": "Europe",
-    "SUBREGION": "Western Europe"
+    "SUBREGION": "Western Europe",
+    "children": []
   },
   "geometry": {
     "type": "MultiPolygon",

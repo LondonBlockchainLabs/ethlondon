@@ -4,37 +4,39 @@
 contract ZoneRegistry {
 
   struct Zone {
-    // bytesX zoneID; // <- hash(zoneName, address)
-    // zoneName string;
-    // parent address or null;
-    // approved false;
-    // children bytesX[]; // <- array of zoneIDs
+    address owner;
+    zoneName string;
+    bytes32 zoneID; // <- hash(zoneName, address)
+    parent address or null;
+    approved false;
+    // children bytes32[]; // <- array of zoneIDs
   }
 
-  mapping(bytesX => Zone) zones; // <- master record of all zones
-  mapping(address => bytesX[]); // <- mapping of all zoneIDs an address owns
+  mapping(bytes32 => Zone) zones; // <- master record of all zones
+  mapping(address => bytes32[]); // <- mapping of all zoneIDs an address owns
   address[] registrants; // <- array of all addresses that have a zone registered in the system
-  bytesX[] pendingZones; // <- array of zoneIDs that have not been approved
+  bytes32[] pendingZones; // <- array of zoneIDs that have not been approved
 
 
   constructor () {
     // ?
   }
 
-  function computeZoneID(address owner, string zoneName) public return (bytesX zoneID) {
+  function computeZoneID(address owner, string zoneName) public return (bytes32 zoneID) {
     return keccak(owner, zoneName);
   }
 
   function registerZone (string zoneName, address parent, ) public {
 
-    bytesX zoneID = computeZoneID(msg.sender, zoneName);
+    bytes32 zoneID = computeZoneID(msg.sender, zoneName);
 
     Zone zoneToRegister = Zone(
-      zoneID,
+      msg.sender,
       zoneName,
+      zoneID,
       parent,
-      false,
-      // empty array of bytesX[]
+      false
+      // empty array of bytes32[]
       )
 
     if (parent == "0x0") {
@@ -60,21 +62,21 @@ contract ZoneRegistry {
       string zoneName */
     ) {
 
-      Zone[] zonesToApprove;
+      Zone[] pendingChildZones;
       // loop through pendingZones
       for (zoneID in pendingZones) {
         if (zones[zoneID].parent == parent) {
-          zonesToApprove.push(zones[zoneID]);
+          pendingChildZones.push(zones[zoneID]);
         }
       }
 
-      return zonesToApprove; // ?? Is this right?
+      return pendingChildZones; // ?? Is this right?
         // Need to get all child addresses and zoneNames into the browser to look up 3box space.
   }
 
   function approveZone(address childOwner, string zoneName) public {
 
-    bytesX zoneID = computeZoneID(childOwner, zoneName);
+    bytes32 zoneID = computeZoneID(childOwner, zoneName);
 
     // Lost of tests here - zone exists, hasn't already been approved, etc.
     require(zones[zoneID].parent == msg.sender); // approver must be zone parent
@@ -82,7 +84,7 @@ contract ZoneRegistry {
     zones[zoneID].approved = true;
     // remove zoneID from pendingZones array
 
-    // return anything? 
+    // return anything?
   }
 
 }

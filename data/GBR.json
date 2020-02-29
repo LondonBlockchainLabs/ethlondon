@@ -1,26 +1,15 @@
 {
   "type": "Feature",
   "properties": {
+    "address": "0x058462918eE04F48F8c1C6d717F700620B9d2bb2".
     "SOVEREIGNT": "United Kingdom",
-    "SOV_A3": "GB1",
-    "LEVEL": 2,
     "TYPE": "Country",
-    "ADMIN": "United Kingdom",
     "NAME": "United Kingdom",
-    "NAME_LONG": "United Kingdom",
-    "ABBREV": "U.K.",
-    "POP_EST": 64769452,
-    "WIKIPEDIA": -99,
-    "ISO_A2": "GB",
-    "ISO_A3": "GBR",
-    "ISO_A3_EH": "GBR",
-    "ISO_N3": "826",
-    "UN_A3": "826",
-    "WB_A2": "GB",
-    "WB_A3": "GBR",
+    "ISO3": "GBR",
     "CONTINENT": "Europe",
     "REGION_UN": "Europe",
-    "SUBREGION": "Northern Europe"
+    "SUBREGION": "Northern Europe",
+    "children": []
   },
   "geometry": {
     "type": "MultiPolygon",

@@ -1,26 +1,15 @@
 {
     "type": "Feature",
     "properties": {
+      "address": "0x3985dE49147725D64407d14c3430bd1dC9c11f04",
       "SOVEREIGNT": "France",
-      "SOV_A3": "FR1",
-      "LEVEL": 2,
       "TYPE": "Country",
-      "ADMIN": "France",
       "NAME": "France",
-      "NAME_LONG": "France",
-      "ABBREV": "Fr.",
-      "POP_EST": 67106161,
-      "WIKIPEDIA": -99,
-      "ISO_A2": "-99",
-      "ISO_A3": "-99",
-      "ISO_A3_EH": "FRA",
-      "ISO_N3": "250",
-      "UN_A3": "250",
-      "WB_A2": "FR",
-      "WB_A3": "FRA",
+      "ISO3": "FRA",
       "CONTINENT": "Europe",
       "REGION_UN": "Europe",
-      "SUBREGION": "Western Europe"
+      "SUBREGION": "Western Europe",
+      "children": []
     },
     "geometry": {
       "type": "MultiPolygon",
