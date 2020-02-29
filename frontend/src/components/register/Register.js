@@ -111,37 +111,35 @@ export default class Register extends Component {
 
     render() {
         return (
-            <Row>
-                <Col id="main-map" md={8}>
+            <div>
+                <div id="main-map" style = {{"position":"absolute",}}>
                     {/* RegisterMap */}
-                </Col>
-            <Col md={4}>
-                <Form>
+                </div>
+                <Form className = "overlay">
                     <FileUploader registeredZones = {this.props.registeredZones} setZoneToRegister={this.props.setZoneToRegister} addPolygonToMap = {this.addPolygonToMap} />
 
                     <Form.Group controlId="zoneName">
-                        <Form.Label>
+                        <Form.Label className = "text-primary">
                             Zone Name
-                        </Form.Label>
+                        </Form.Label> 
                         <Form.Control type="text" placeholder="Enter your zone name here" />
-                        <Form.Text className="text-muted">
-                        Name your zone to be registered
-                        </Form.Text>
+                        
                     </Form.Group>
 
                     <Form.Group controlId="address">
-                        <Form.Label>
+                        <Form.Label className = "text-primary">
                             Ethereum Wallet Address
                         </Form.Label>
-                        <Form.Control plaintext readOnly defaultValue={this.props.addr} />
+                        <Form.Control readOnly className = "text-muted" placeholder = {this.props.addr} />
+                            
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>
-            </Col>
-        </Row>
+            
+        </div>
         );
     }
 
