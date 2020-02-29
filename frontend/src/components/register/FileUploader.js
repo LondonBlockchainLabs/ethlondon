@@ -40,12 +40,12 @@ export default function Accept(props) {
         const reader = new FileReader();
         reader.onload = () => {
 
-          this.props.registeredZones.forEach(function (registeredZone) {
-            // if loadedZone in registeredZone
-              // Has parent
+          // this.props.registeredZones.forEach(function (registeredZone) {
+          //   // if loadedZone in registeredZone
+          //     // Has parent
 
-            // else does not.
-          })
+          //   // else does not.
+          // })
             onPolygonDrop(JSON.parse(reader.result))
         }
 
@@ -75,7 +75,7 @@ export default function Accept(props) {
 
 
     const acceptedFilesItems = acceptedFiles.map(file => (
-        <li key={file.path}>
+        <li className = "text-success" style = {{"fontSize":"12pt"}} key={file.path}>
         {file.path} - {file.size} bytes
         </li>
     ));
@@ -85,10 +85,10 @@ export default function Accept(props) {
         <div {...getRootProps({style})}>
             <input {...getInputProps()} />
             <p>Drag 'n' drop some files here, or click to select files</p>
-            <em>(Only *.jpeg and *.png images will be accepted)</em>
+            <em>(Only *.json files will be accepted)</em>
         </div>
         <aside>
-            <h4>Accepted files</h4>
+            <h6 className = "text-primary">Accepted GeoJSON:</h6>
             <ul>
             {acceptedFilesItems}
             </ul>
