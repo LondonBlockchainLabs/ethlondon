@@ -1,4 +1,4 @@
-var jsonURLs = ['../data/uk.json', '../data/france.json', '../data/germany.json'];
+var jsonURLs = ['../data/GBR.json', '../data/FRA.json', '../data/DEU.json'];
 var jsonPromises = [];
 var geojsonZones = [];
 

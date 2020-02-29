@@ -1,22 +1,56 @@
 import React,{Component} from 'react';
 import {Row, Col, Form, Button}from 'react-bootstrap';
 import FileUploader from './FileUploader'
+import mapbox from 'mapbox-gl'
+import * as d3 from "d3"
 
 export default class Register extends Component {
+
+
+  async componentDidMount() {
+    mapbox.accessToken = 'pk.eyJ1Ijoicm9iaXNvbml2IiwiYSI6ImNqbjM5eXEwdjAyMnozcW9jMzdpbGk5emoifQ.Q_S2qL8UW-UyVLikG_KqQA';
+
+    var color = d3.schemeSet2;
+    var map = new mapbox.Map({
+      container: 'main-map',
+      style: 'mapbox://styles/mapbox/light-v10',
+      center: [
+        14.038784600499525,
+        49.29969274777156
+      ],
+      zoom: 2.7,
+    });
+
+    // Connect to contract
+
+    // Pull all registered addresses
+
+    // Pull all 3box spaces
+
+    // get array of approved GeoJSON files
+
+    // Put them into turf objects
+
+
+
+  }
+
+  async onClick() {
+
+  }
 
 
 
     render() {
         return (
             <Row>
-                <Col md={8}>
+                <Col id="main-map" md={8}>
                     {/* RegisterMap */}
-                    my map
                 </Col>
             <Col md={4}>
                 <Form>
                     <FileUploader />
-                                        
+
                     <Form.Group controlId="zoneName">
                         <Form.Label>
                             Zone Name
@@ -33,7 +67,7 @@ export default class Register extends Component {
                         </Form.Label>
                         <Form.Control plaintext readOnly defaultValue={this.props.addr} />
                     </Form.Group>
-                    
+
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>

@@ -13,8 +13,8 @@ contract ZoneRegistry {
   }
 
   mapping(bytes32 => Zone) zones; // <- master record of all zones
-  mapping(address => bytes32[]); // <- mapping of all zoneIDs an address owns
-  address[] registrants; // <- array of all addresses that have a zone registered in the system
+  mapping(address => bytes32[]) ; // <- mapping of all zoneIDs an address owns
+  address[] public registrants; // <- array of all addresses that have a zone registered in the system
   bytes32[] pendingZones; // <- array of zoneIDs that have not been approved
 
 
@@ -23,7 +23,7 @@ contract ZoneRegistry {
   }
 
   function computeZoneID(address owner, string zoneName) public return (bytes32 zoneID) {
-    return keccak(owner, zoneName);
+    return keccak256(owner, zoneName);
   }
 
   function registerZone (string zoneName, address parent, ) public {
@@ -85,6 +85,11 @@ contract ZoneRegistry {
     // remove zoneID from pendingZones array
 
     // return anything?
+  }
+
+
+  function isZoneApproved(address owner, string zoneName) public returns (bool approved) {
+    return zones[computeZoneID(owner, zoneName)].approved;
   }
 
 }

@@ -10,12 +10,16 @@ import {
 import { ethers } from "ethers";
 import NavBar from './NavBar'
 import Register from './register/Register'
+import registeredZones from '../registeredTestZones.json';
+
+// import Approve from './approve/Approve'
 
 class App extends Component {
-  
+
 
   state = {
     needToAWeb3Browser: false,
+    // registeredZones: registeredZones,
   }
 
   async getAddressFromMetaMask() {
@@ -29,14 +33,15 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    console.log(registeredZones);
     await this.getAddressFromMetaMask();
     if (this.state.accounts) {
       // Now MetaMask's provider has been enabled, we can start working with 3Box
     }
   }
-  
 
-  render() { 
+
+  render() {
 
     if (this.state.needToAWeb3Browser) {
       return <h1>Please install metamask</h1>
@@ -54,14 +59,14 @@ class App extends Component {
                   <Register addr = {this.state.accounts[0]} />
                 </Route>
                 <Route path="/admin">
-    
+
                 </Route>
                 <Route path="/">
-    
+
                 </Route>
               </Switch>
             )}
-          
+
         </div>
       </Router>
     );

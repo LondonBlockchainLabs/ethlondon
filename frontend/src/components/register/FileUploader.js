@@ -1,6 +1,6 @@
 import React, {useMemo, useCallback}  from 'react';
 import {useDropzone} from 'react-dropzone';
-
+import onPolygonDrop from './onPolygonDrop'
 
 
 // styling
@@ -19,19 +19,19 @@ const baseStyle = {
     outline: 'none',
     transition: 'border .24s ease-in-out'
   };
-  
+
   const activeStyle = {
     borderColor: '#2196f3'
   };
-  
+
   const acceptStyle = {
     borderColor: '#00e676'
   };
-  
+
   const rejectStyle = {
     borderColor: '#ff1744'
   };
-  
+
 // dropzone component
 export default function Accept(props) {
 
@@ -39,21 +39,28 @@ export default function Accept(props) {
         // Do something with the files
         const reader = new FileReader();
         reader.onload = () => {
-            console.log(JSON.parse(reader.result))
+
+          this.props.registeredZones.forEach(function (registeredZone) {
+            // if loadedZone in registeredZone
+              // Has parent
+
+            // else does not.
+          })
+            onPolygonDrop(JSON.parse(reader.result))
         }
-        
+
         reader.readAsBinaryString(acceptedFiles[0]);
     }, [])
 
     const {
-        acceptedFiles, 
+        acceptedFiles,
         getRootProps,
         getInputProps,
         isDragActive,
         isDragAccept,
         isDragReject
       } = useDropzone({accept: '.json', onDrop : onDrop});
-    
+
     const style = useMemo(() => ({
         ...baseStyle,
         ...(isDragActive ? activeStyle : {}),
@@ -65,8 +72,8 @@ export default function Accept(props) {
     ]);
 
     // callback function on drop
-    
-  
+
+
     const acceptedFilesItems = acceptedFiles.map(file => (
         <li key={file.path}>
         {file.path} - {file.size} bytes
