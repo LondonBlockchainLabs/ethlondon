@@ -57,7 +57,7 @@
   height: 500px;
   width: 450px;
 
-  background: rgba(255, 255, 255, 0.5); /* Black see-through */
+  background: rgba(255, 255, 255, 0.5); /* White see-through */
   color: #282c34; 
   
 
@@ -68,7 +68,6 @@
   text-align: left;
 }
 
-.subtitle {
-  font-size : 20pt;
-  color: white;
+.navbar {
+  background: rgba(255, 255, 255, 0.5); /* White see-through */
 }

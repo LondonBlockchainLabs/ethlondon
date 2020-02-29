@@ -12,11 +12,24 @@ export default class Register extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      map : undefined,
+        map : undefined,
+        zoneName : '',
     };
 
     this.addPolygonToMap = this.addPolygonToMap.bind(this);
     this.registerPolygon = this.registerPolygon.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+  }
+
+  handleChange (e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
 
   }
 
@@ -105,7 +118,7 @@ export default class Register extends Component {
 
     // console.log('yo')
     console.log(this.props.zoneToRegister);
-    console.log(this);
+    console.log(this.state.zoneName);
     // call registerZone on ethers contract ...
 
     // Write geojson string to 3box under
@@ -127,7 +140,7 @@ export default class Register extends Component {
                         <Form.Label className = "text-primary">
                             Zone Name
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Enter your zone name here" />
+                        <Form.Control type="text" placeholder="Enter your zone name here" name = "zoneName" onChange = {this.handleChange} />
 
                     </Form.Group>
 
